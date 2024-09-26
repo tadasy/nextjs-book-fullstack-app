@@ -7,7 +7,7 @@ export async function PUT(request, context) {
 
     try {
         await connectDB();
-        const singleItem = ItemModel.findById(context.params.id);
+        const singleItem = await ItemModel.findById(context.params.id);
         if (singleItem.email === reqBody.email) {
             await ItemModel.updateOne({ _id: context.params.id }, reqBody);
             return NextResponse.json({ message: "アイテム更新成功" });    
